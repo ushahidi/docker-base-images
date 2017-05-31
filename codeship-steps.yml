@@ -1,17 +1,20 @@
-- name: "Test node-ci"
-  service: node-ci
-  command: /goss/goss -g /tmp/goss.yaml v -f rspecish
+- name: "Run tests"
+  type: parallel
+  steps:
+    - name: "Test node-ci"
+      service: node-ci
+      command: /goss/goss -g /tmp/goss.yaml v -f rspecish
 
-- name: "Test php-ci"
-  service: php-ci
-  command: /goss/goss -g /tmp/goss.yaml v -f rspecish
+    - name: "Test php-ci"
+      service: php-ci
+      command: /goss/goss -g /tmp/goss.yaml v -f rspecish
 
 ## Publish latest
-- type: parallel
+- name: "Publish latest tags"
+  type: parallel
   tag: master
   steps:
     - name: "Push ushahidi/php-ci:latest"
-      tag: master
       service: php-ci
       type: push
       image_name: ushahidi/php-ci
@@ -20,7 +23,6 @@
       encrypted_dockercfg_path: dockercfg.encrypted
 
     - name: "Push ushahidi/node-ci:latest"
-      tag: master
       service: node-ci
       type: push
       image_name: ushahidi/node-ci
@@ -29,5 +31,27 @@
       encrypted_dockercfg_path: dockercfg.encrypted
 
 ## Publish PHP release tags
+- name: "Publish PHP release tags"
+  type: parallel
+  tag: '^php-.*'
+  steps:
+    - name: "Push ushahidi/php-ci:(php release tag)"
+      service: php-ci
+      type: push
+      image_name: ushahidi/php-ci
+      image_tag: "{{.Branch}}"
+      registry: https://index.docker.io/v1/
+      encrypted_dockercfg_path: dockercfg.encrypted
 
-## Publish Node.js release tags
+## Publish node release tags
+- name: "Publish Node release tags"
+  type: parallel
+  tag: '^node-.*'
+  steps:
+    - name: "Push ushahidi/node-ci:(node release tag)"
+      service: node-ci
+      type: push
+      image_name: ushahidi/node-ci
+      image_tag: "{{.Branch}}"
+      registry: https://index.docker.io/v1/
+      encrypted_dockercfg_path: dockercfg.encrypted
