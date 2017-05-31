@@ -3,11 +3,31 @@
   command: /goss/goss -g /tmp/goss.yaml v -f rspecish
 
 - name: "Test php-ci"
-  service: nodejs-ci
+  service: php-ci
   command: /goss/goss -g /tmp/goss.yaml v -f rspecish
 
 ## Publish latest
+- type: parallel
+  tag: master
+  steps:
+    - name: "Push ushahidi/php-ci:latest"
+      tag: master
+      service: php-ci
+      type: push
+      image_name: ushahidi/php-ci
+      image_tag: latest
+      registry: https://index.docker.io/v1/
+      encrypted_dockercfg_path: dockercfg.encrypted
 
-## Publish PHP releases
+    - name: "Push ushahidi/nodejs-ci:latest"
+      tag: master
+      service: nodejs-ci
+      type: push
+      image_name: ushahidi/nodejs-ci
+      image_tag: latest
+      registry: https://index.docker.io/v1/
+      encrypted_dockercfg_path: dockercfg.encrypted
 
-## Publish Node.js releases
+## Publish PHP release tags
+
+## Publish Node.js release tags
