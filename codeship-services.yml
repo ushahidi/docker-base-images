@@ -1,10 +1,10 @@
-nodejs-ci:
+node-ci:
   build:
-    image: ushahidi/nodejs-ci
-    context: nodejs-ci
+    image: ushahidi/node-ci
+    context: node-ci
     dockerfile: Dockerfile
   volumes:
-    - ./nodejs-ci/goss.yaml:/tmp/goss.yaml
+    - ./node-ci/goss.yaml:/tmp/goss.yaml
   volumes_from:
     - goss
 

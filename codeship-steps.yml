@@ -1,5 +1,5 @@
-- name: "Test nodejs-ci"
-  service: nodejs-ci
+- name: "Test node-ci"
+  service: node-ci
   command: /goss/goss -g /tmp/goss.yaml v -f rspecish
 
 - name: "Test php-ci"
@@ -19,11 +19,11 @@
       registry: https://index.docker.io/v1/
       encrypted_dockercfg_path: dockercfg.encrypted
 
-    - name: "Push ushahidi/nodejs-ci:latest"
+    - name: "Push ushahidi/node-ci:latest"
       tag: master
-      service: nodejs-ci
+      service: node-ci
       type: push
-      image_name: ushahidi/nodejs-ci
+      image_name: ushahidi/node-ci
       image_tag: latest
       registry: https://index.docker.io/v1/
       encrypted_dockercfg_path: dockercfg.encrypted

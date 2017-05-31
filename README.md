@@ -4,7 +4,7 @@ Ready to be used for products and projects
 
 # List of images
 
-* `nodejs-ci` (docker hub: `ushahidi/nodejs-ci`): container with node.js, purposed for use in a CI environment
+* `node-ci` (docker hub: `ushahidi/node-ci`): container with node.js, purposed for use in a CI environment
 * `php-ci` (docker hub: `ushahidi/php-ci`): container with PHP, purposed for use in a CI environment
 
 # Testing
