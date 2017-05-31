@@ -1,0 +1,35 @@
+command:
+  /bin/bash -c 'true':
+    exit-status: 0
+    stdout: []
+    stderr: []
+    timeout: 10000
+  bower --version:
+    exit-status: 0
+    stdout:
+    - 1.8.0
+    stderr: []
+    timeout: 10000
+  git --version:
+    exit-status: 0
+    stdout:
+    - git version 2.1.4
+    stderr: []
+    timeout: 10000
+  gulp --version:
+    exit-status: 0
+    stdout:
+    - '/^\[[0-9:]+\] CLI version 3.9.1$/'
+    stderr: []
+    timeout: 10000
+  node --version:
+    exit-status: 0
+    stdout:
+    - v6.10.3
+    stderr: []
+    timeout: 10000
+  npm-install-silent.sh -g forever:
+    exit-status: 0
+    stdout: []
+    stderr: []
+    timeout: 10000

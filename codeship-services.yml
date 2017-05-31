@@ -1,0 +1,23 @@
+nodejs-ci:
+  build:
+    image: ushahidi/nodejs-ci
+    context: nodejs-ci
+    dockerfile: Dockerfile
+  volumes:
+    - ./nodejs-ci/goss.yaml:/tmp/goss.yaml
+  volumes_from:
+    - goss
+
+php-ci:
+  build:
+    image: ushahidi/php-ci
+    context: php-ci
+    dockerfile: Dockerfile
+  volumes:
+    - ./php-ci/goss.yaml:/tmp/goss.yaml
+  volumes_from:
+    - goss
+
+goss:
+  build: 
+    dockerfile_path: goss.Dockerfile

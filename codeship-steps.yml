@@ -1,0 +1,13 @@
+- name: "Test nodejs-ci"
+  service: nodejs-ci
+  command: /goss/goss -g /tmp/goss.yaml v -f rspecish
+
+- name: "Test php-ci"
+  service: nodejs-ci
+  command: /goss/goss -g /tmp/goss.yaml v -f rspecish
+
+## Publish latest
+
+## Publish PHP releases
+
+## Publish Node.js releases
