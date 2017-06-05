@@ -11,6 +11,7 @@ RUN apt-get update && \
       libc-client2007e-dev \
       libkrb5-dev \
       libcurl4-openssl-dev \
+      gettext-base \
       unzip \
       rsync \
       git \
@@ -26,3 +27,8 @@ RUN apt-get update && \
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | \
       php -- --install-dir=/usr/local/bin --filename=composer
+
+# Add ci wrapper
+ADD ci-wrapper.sh /usr/local/bin
+
+ENTRYPOINT [ "/usr/local/bin/ci-wrapper.sh" ]

@@ -15,7 +15,7 @@ command:
   php --version:
     exit-status: 0
     stdout:
-    - 'PHP 5.6.30 (cli) (built: May 13 2017 01:14:34)'
+    - '/PHP 5.6.30 \(cli\) \(built: .*\)/'
     - Copyright (c) 1997-2016 The PHP Group
     - Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies
     stderr: []
