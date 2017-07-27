@@ -32,4 +32,4 @@ command:
     exit-status: 0
     stdout: []
     stderr: []
-    timeout: 10000
+    timeout: 30000

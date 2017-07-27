@@ -18,6 +18,16 @@ php-ci:
   volumes_from:
     - goss
 
+php-fpm-nginx:
+  build:
+    image: ushahidi/php-fpm-nginx
+    context: php-fpm-nginx
+    dockerfile: Dockerfile
+  volumes:
+    - ./php-fpm-nginx/goss.yaml:/tmp/goss.yaml
+  volumes_from:
+    - goss
+
 goss:
   build: 
     dockerfile_path: goss.Dockerfile

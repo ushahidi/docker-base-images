@@ -12,6 +12,12 @@ command:
     - Do not run Composer as root/super user! See https://getcomposer.org/root for
       details
     timeout: 10000
+  nginx -v:
+    exit-status: 0
+    stdout: []
+    stderr:
+    - 'nginx version: nginx/1.6.2'
+    timeout: 10000
   php --version:
     exit-status: 0
     stdout:
@@ -64,5 +70,13 @@ command:
     - xmlwriter
     - zlib
     - '[Zend Modules]'
+    stderr: []
+    timeout: 10000
+  php-fpm -v:
+    exit-status: 0
+    stdout:
+    - '/PHP 5.6.31 \(fpm-fcgi\) \(built: .*\)/'
+    - Copyright (c) 1997-2016 The PHP Group
+    - Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies
     stderr: []
     timeout: 10000

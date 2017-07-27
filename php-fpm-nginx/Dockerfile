@@ -1,4 +1,4 @@
-FROM php:5.6.31
+FROM php:5.6.31-fpm
 
 # Install extensions and handy tools
 RUN apt-get update && \
@@ -15,7 +15,9 @@ RUN apt-get update && \
       unzip \
       rsync \
       git \
-      netcat && \
+      netcat \
+      nginx \
+      supervisor && \
     docker-php-ext-install curl json mcrypt bcmath pdo pdo_mysql mysqli && \
     docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
     docker-php-ext-install imap && \
@@ -24,11 +26,18 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# nginx access / error log
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+  && ln -sf /dev/stderr /var/log/nginx/error.log
+
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | \
       php -- --install-dir=/usr/local/bin --filename=composer
 
-# Add ci wrapper
-ADD ci-wrapper.sh /usr/local/bin
+# Add supervisor config
+ADD programs.conf /etc/supervisor/conf.d/programs.conf
 
-ENTRYPOINT [ "/usr/local/bin/ci-wrapper.sh" ]
+# Add startup script
+ADD startup.sh /usr/local/bin
+
+ENTRYPOINT [ "/usr/local/bin/startup.sh" ]

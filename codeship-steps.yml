@@ -9,6 +9,11 @@
       service: php-ci
       command: /goss/goss -g /tmp/goss.yaml v -f rspecish
 
+    - name: "Test php-fpm-nginx"
+      service: php-fpm-nginx
+      command: /goss/goss -g /tmp/goss.yaml v -f rspecish
+
+
 ## Publish latest
 - name: "Publish latest tags"
   type: parallel
@@ -18,6 +23,14 @@
       service: php-ci
       type: push
       image_name: ushahidi/php-ci
+      image_tag: latest
+      registry: https://index.docker.io/v1/
+      encrypted_dockercfg_path: dockercfg.encrypted
+
+    - name: "Push ushahidi/php-fpm-nginx:latest"
+      service: php-fpm-nginx
+      type: push
+      image_name: ushahidi/php-fpm-nginx
       image_tag: latest
       registry: https://index.docker.io/v1/
       encrypted_dockercfg_path: dockercfg.encrypted
@@ -35,6 +48,14 @@
   type: parallel
   tag: '^php-.*'
   steps:
+    - name: "Push ushahidi/php-fpm-nginx:(php release tag)"
+      service: php-fpm-nginx
+      type: push
+      image_name: ushahidi/php-fpm-nginx
+      image_tag: "{{.Branch}}"
+      registry: https://index.docker.io/v1/
+      encrypted_dockercfg_path: dockercfg.encrypted
+      
     - name: "Push ushahidi/php-ci:(php release tag)"
       service: php-ci
       type: push
