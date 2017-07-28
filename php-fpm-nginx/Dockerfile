@@ -17,7 +17,8 @@ RUN apt-get update && \
       git \
       netcat \
       nginx \
-      supervisor && \
+      supervisor \
+      cron && \
     docker-php-ext-install curl json mcrypt bcmath pdo pdo_mysql mysqli && \
     docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
     docker-php-ext-install imap && \
