@@ -7,7 +7,7 @@ command:
   composer --version:
     exit-status: 0
     stdout:
-    - Composer version 1.4.2 2017-05-17 08:17:52
+    - '/Composer version .*/'
     stderr:
     - Do not run Composer as root/super user! See https://getcomposer.org/root for
       details

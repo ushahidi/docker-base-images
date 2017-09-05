@@ -1,9 +1,11 @@
 FROM php:5.6.31-fpm
 
+ARG HTTP_PORT=8080
+
 # Install extensions and handy tools
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y \
+    apt-get install -y --no-install-recommends \
       libfreetype6-dev \
       libjpeg62-turbo-dev \
       libpng12-dev \
@@ -17,8 +19,14 @@ RUN apt-get update && \
       git \
       netcat \
       nginx \
-      supervisor \
-      cron && \
+      python3-pip \
+      python3-dev && \
+    pip3 install chaperone && \
+    ( cd /etc/nginx && \
+      sed -i -E 's%^([[:space:]]*listen[^[:digit:]]*)([[:digit:]]+)(.*)%\1'$HTTP_PORT'\3%' sites-available/default \
+      ) && \
+    chgrp -R 0 /var/lib/nginx /run && \
+    chmod -R g+rwX /var/lib/nginx /run && \
     docker-php-ext-install curl json mcrypt bcmath pdo pdo_mysql mysqli && \
     docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
     docker-php-ext-install imap && \
@@ -35,10 +43,16 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 RUN curl -sS https://getcomposer.org/installer | \
       php -- --install-dir=/usr/local/bin --filename=composer
 
-# Add supervisor config
-ADD programs.conf /etc/supervisor/conf.d/programs.conf
+# Add chaperone config
+ADD fpm-nginx.processes.conf /etc/chaperone.d/
 
-# Add startup script
-ADD startup.sh /usr/local/bin
+# Add init script
+ADD init.sh /usr/local/bin
 
-ENTRYPOINT [ "/usr/local/bin/startup.sh" ]
+ENV HTTP_PORT=$HTTP_PORT \
+    ENABLE_NGINX=true \
+    ENABLE_PHPFPM=true
+
+EXPOSE $HTTP_PORT
+
+ENTRYPOINT [ "/usr/local/bin/init.sh" ]
