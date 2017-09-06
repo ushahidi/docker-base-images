@@ -25,7 +25,7 @@ RUN apt-get update && \
     ( cd /etc/nginx && \
       sed -i -E 's%^([[:space:]]*listen[^[:digit:]]*)([[:digit:]]+)(.*)%\1'$HTTP_PORT'\3%' sites-available/default \
       ) && \
-    chgrp -R 0 /var/lib/nginx /run && \
+    chgrp -R 0 /var/lib/nginx /run  && \
     chmod -R g+rwX /var/lib/nginx /run && \
     docker-php-ext-install curl json mcrypt bcmath pdo pdo_mysql mysqli && \
     docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
@@ -44,7 +44,7 @@ RUN curl -sS https://getcomposer.org/installer | \
       php -- --install-dir=/usr/local/bin --filename=composer
 
 # Add chaperone config
-ADD fpm-nginx.processes.conf /etc/chaperone.d/
+ADD chaperone.conf fpm-nginx.processes.conf /etc/chaperone.d/
 
 # Add init script
 ADD init.sh /usr/local/bin
