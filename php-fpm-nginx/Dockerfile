@@ -31,11 +31,22 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# nginx access / error log
+# nginx access / error log , php-fpm tweaking
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log && \
-    mkdir -m 1777 -p /run/php && \
-    sed -i -e 's/^.*clear_env.*/clear_env = no/' /etc/php/5.6/fpm/pool.d/www.conf
+    sed -i -E -e 's/^(pid[[:space:]]*=)(.*)/; \1\2/' /etc/php/5.6/fpm/php-fpm.conf && \
+    { \
+        echo ; \
+        echo "[global]" ; \
+        echo "error_log = /proc/self/fd/2" ; \
+        echo "daemonize = no " ; \
+        echo ; \
+        echo "[www]" ; \
+        echo "listen = [::]:9000" ; \
+        echo "access.log = /proc/self/fd/2" ; \
+        echo "catch_workers_output = yes" ; \
+        echo "clear_env = no" ; \
+    } | tee -a /etc/php/5.6/fpm/php-fpm.conf
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | \
