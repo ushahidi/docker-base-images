@@ -11,8 +11,8 @@ RUN apt-get update && \
     { echo 'deb https://packages.sury.org/php/ stretch main' > /etc/apt/sources.list.d/deb.sury.org.list ; } && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-      php5.6 php5.6-fpm php5.6-curl php5.6-json php5.6-mbstring php5.6-mcrypt \
-             php5.6-bcmath php5.6-mysql php5.6-imap php5.6-gd php5.6-xml php5.6-zip \
+      php7.0 php7.0-fpm php7.0-curl php7.0-json php7.0-mbstring php7.0-mcrypt \
+             php7.0-bcmath php7.0-mysql php7.0-imap php7.0-gd php7.0-xml php7.0-zip \
       php-redis \
       gettext-base \
       unzip \
@@ -34,7 +34,7 @@ RUN apt-get update && \
 # nginx access / error log , php-fpm tweaking
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log && \
-    sed -i -E -e 's/^(pid[[:space:]]*=)(.*)/; \1\2/' /etc/php/5.6/fpm/php-fpm.conf && \
+    sed -i -E -e 's/^(pid[[:space:]]*=)(.*)/; \1\2/' /etc/php/7.0/fpm/php-fpm.conf && \
     { \
         echo ; \
         echo "[global]" ; \
@@ -46,7 +46,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
         echo "access.log = /proc/self/fd/2" ; \
         echo "catch_workers_output = yes" ; \
         echo "clear_env = no" ; \
-    } | tee -a /etc/php/5.6/fpm/php-fpm.conf
+    } | tee -a /etc/php/7.0/fpm/php-fpm.conf
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | \
