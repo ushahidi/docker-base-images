@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM ushahidi/debian:stretch-dockerize
 
 ARG HTTP_PORT=8080
 
@@ -52,16 +52,18 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
 RUN curl -sS https://getcomposer.org/installer | \
       php -- --install-dir=/usr/local/bin --filename=composer
 
+# Add nginx config template
+ADD nginx-vhost.conf ${DOCKERIZE_TEMPLATE_DIR}/etc/nginx/sites-available/default
+
 # Add chaperone config
 ADD chaperone.conf fpm-nginx.processes.conf /etc/chaperone.d/
 
-# Add init script
+# Add init script and set it as the endpoint of the container image
 ADD init.sh /usr/local/bin
+RUN $DOCKERCES_MANAGE_UTIL endpoint /usr/local/bin/init.sh
 
 ENV HTTP_PORT=$HTTP_PORT \
     ENABLE_NGINX=true \
     ENABLE_PHPFPM=true
 
 EXPOSE $HTTP_PORT
-
-ENTRYPOINT [ "/usr/local/bin/init.sh" ]

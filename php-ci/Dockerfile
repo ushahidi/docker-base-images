@@ -1,4 +1,4 @@
-FROM php:5.6.31
+FROM php:5.6.32
 
 # Install extensions and handy tools
 RUN apt-get update && \

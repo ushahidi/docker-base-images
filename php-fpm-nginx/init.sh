@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ $$ -ne 1 ]; then
+	echo "init.sh -- FAIL: WHY AM I NOT PID 1??"
+	exit 1
+fi
+
 start() {
 	# Start the chaperone process
 	if [[ $UID -eq 0 || $EUID -eq 0 ]]; then
