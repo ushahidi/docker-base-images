@@ -29,5 +29,5 @@ php-fpm-nginx:
     - goss
 
 goss:
-  build: 
+  build:
     dockerfile_path: goss.Dockerfile

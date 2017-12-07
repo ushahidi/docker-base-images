@@ -1,6 +1,10 @@
 # Base docker images
 
-Ready to be used for products and projects
+Ready to be used for products and projects.
+
+See [docker-os-images](github.com/ushahidi/docker-os-images) for the images
+that these ones are built on.
+
 
 # List of images
 
@@ -19,4 +23,3 @@ manage your tests
 ## Run the tests
 
         ./goss.sh run <image directory name>
-

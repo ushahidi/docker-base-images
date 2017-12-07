@@ -55,7 +55,7 @@
       image_tag: "{{.Branch}}"
       registry: https://index.docker.io/v1/
       encrypted_dockercfg_path: dockercfg.encrypted
-      
+
     - name: "Push ushahidi/php-ci:(php release tag)"
       service: php-ci
       type: push
