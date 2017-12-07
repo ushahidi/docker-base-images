@@ -1,15 +1,3 @@
-dockerize-debian:
-  build:
-    image: ushahidi/debian:stretch-dockerize
-    context: dockerize
-    dockerfile: debian.Dockerfile
-
-dockerize-alpine:
-  build:
-    image: ushahidi/alpine:3.6-dockerize
-    context: dockerize
-    dockerfile: alpine.Dockerfile
-
 node-ci:
   build:
     image: ushahidi/node-ci
