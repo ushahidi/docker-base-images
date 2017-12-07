@@ -1,6 +1,14 @@
 - name: "Run tests"
   type: parallel
   steps:
+    - name: "Test dockerized debian"
+      service: dockerize-debian
+      command: /bin/true  # test: does it build?
+
+    - name: "Test dockerized alpine"
+      service: dockerize-alpine
+      command: /bin/true  # test: does it build?
+
     - name: "Test node-ci"
       service: node-ci
       command: /goss/goss -g /tmp/goss.yaml v -f rspecish
@@ -15,6 +23,24 @@
 
 
 ## Publish latest
+- name: "Publish dockerize"
+  type: parallel
+  steps:
+    - name: "Push ushahidi/debian:stretch-dockerize"
+      service: dockerize-debian
+      type: push
+      image_name: ushahidi/debian
+      image_tag: stretch-dockerize
+      registry: https://index.docker.io/v1/
+      encrypted_dockercfg_path: dockercfg.encrypted
+    - name: "Push ushahidi/alpine:3.6-dockerize"
+      service: dockerize-alpine
+      type: push
+      image_name: ushahidi/alpine
+      image_tag: 3.6-dockerize
+      registry: https://index.docker.io/v1/
+      encrypted_dockercfg_path: dockercfg.encrypted
+
 - name: "Publish latest tags"
   type: parallel
   tag: master
@@ -55,7 +81,7 @@
       image_tag: "{{.Branch}}"
       registry: https://index.docker.io/v1/
       encrypted_dockercfg_path: dockercfg.encrypted
-      
+
     - name: "Push ushahidi/php-ci:(php release tag)"
       service: php-ci
       type: push
