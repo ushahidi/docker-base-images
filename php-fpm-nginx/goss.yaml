@@ -29,11 +29,7 @@ command:
   php --version:
     exit-status: 0
     stdout:
-    - PHP 7.0.26-1+0~20171129100718.10+stretch~1.gbp95da5c (cli)
-    - Copyright (c) 1997-2017 The PHP Group
-    - Zend Engine v3.0.0, Copyright (c) 1998-2017 Zend Technologies
-    - with Zend OPcache v7.0.26-1+0~20171129100718.10+stretch~1.gbp95da5c, Copyright
-      (c) 1999-2017, by Zend Technologies
+    - /PHP 7\.0\.26/
     stderr: []
     timeout: 10000
   php -m:
@@ -99,10 +95,6 @@ command:
   php-fpm7.0 -v:
     exit-status: 0
     stdout:
-    - PHP 7.0.26-1+0~20171129100718.10+stretch~1.gbp95da5c (fpm-fcgi)
-    - Copyright (c) 1997-2017 The PHP Group
-    - Zend Engine v3.0.0, Copyright (c) 1998-2017 Zend Technologies
-    - with Zend OPcache v7.0.26-1+0~20171129100718.10+stretch~1.gbp95da5c, Copyright
-      (c) 1999-2017, by Zend Technologies
+    - /PHP 7\.0\.26/
     stderr: []
     timeout: 10000
