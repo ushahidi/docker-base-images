@@ -1,6 +1,6 @@
 FROM ushahidi/debian:stretch-dockerize
 
-ARG HTTP_PORT=8080
+ENV PHP_MAJOR_VERSION 7.0
 
 # Install php, extensions and handy tools
 RUN apt-get update && \
@@ -13,7 +13,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       php7.0 php7.0-fpm php7.0-curl php7.0-json php7.0-mbstring php7.0-mcrypt \
              php7.0-bcmath php7.0-mysql php7.0-imap php7.0-gd php7.0-xml php7.0-zip \
-      php-redis \
+      php-redis php-memcached \
       gettext-base \
       unzip \
       rsync \
@@ -23,9 +23,6 @@ RUN apt-get update && \
       python3 python3-pip python3-setuptools python3-wheel python3-dev && \
     php -r "if (new Redis() == true){ echo \"OK \r\n\"; }" && \
     pip3 install chaperone && \
-    ( cd /etc/nginx && \
-      sed -i -E 's%^([[:space:]]*listen[^[:digit:]]*)([[:digit:]]+)(.*)%\1'$HTTP_PORT'\3%' sites-available/default \
-      ) && \
     chgrp -R 0 /var/lib/nginx /run  && \
     chmod -R g+rwX /var/lib/nginx /run && \
     apt-get clean && \
@@ -33,20 +30,8 @@ RUN apt-get update && \
 
 # nginx access / error log , php-fpm tweaking
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
-    ln -sf /dev/stderr /var/log/nginx/error.log && \
-    sed -i -E -e 's/^(pid[[:space:]]*=)(.*)/; \1\2/' /etc/php/7.0/fpm/php-fpm.conf && \
-    { \
-        echo ; \
-        echo "[global]" ; \
-        echo "error_log = /proc/self/fd/2" ; \
-        echo "daemonize = no " ; \
-        echo ; \
-        echo "[www]" ; \
-        echo "listen = [::]:9000" ; \
-        echo "access.log = /proc/self/fd/2" ; \
-        echo "catch_workers_output = yes" ; \
-        echo "clear_env = no" ; \
-    } | tee -a /etc/php/7.0/fpm/php-fpm.conf
+    ln -sf /dev/stderr /var/log/nginx/error.log
+ADD php-fpm.conf ${DOCKERIZE_TEMPLATE_DIR}/etc/php/${PHP_MAJOR_VERSION}/fpm/php-fpm.conf
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | \
@@ -58,11 +43,11 @@ ADD nginx-vhost.conf ${DOCKERIZE_TEMPLATE_DIR}/etc/nginx/sites-available/default
 # Add chaperone config
 ADD chaperone.conf fpm-nginx.processes.conf /etc/chaperone.d/
 
-# Add init script and set it as the endpoint of the container image
+# Add init script as endpoint of the container image
 ADD init.sh /usr/local/bin
 RUN $DOCKERCES_MANAGE_UTIL endpoint /usr/local/bin/init.sh
 
-ENV HTTP_PORT=$HTTP_PORT \
+ENV HTTP_PORT=8080 \
     ENABLE_NGINX=true \
     ENABLE_PHPFPM=true
 
