@@ -29,7 +29,7 @@ command:
   php --version:
     exit-status: 0
     stdout:
-    - /PHP 7\.0\.26/
+    - /PHP 7\.2\.[0-9]+/
     stderr: []
     timeout: 10000
   php -m:
@@ -56,7 +56,6 @@ command:
     - json
     - libxml
     - mbstring
-    - mcrypt
     - mysql
     - mysqli
     - mysqlnd
@@ -92,9 +91,9 @@ command:
     - Zend OPcache
     stderr: []
     timeout: 10000
-  php-fpm7.0 -v:
+  php-fpm7.2 -v:
     exit-status: 0
     stdout:
-    - /PHP 7\.0\.26/
+    - /PHP 7\.2\.[0-9]+/
     stderr: []
     timeout: 10000

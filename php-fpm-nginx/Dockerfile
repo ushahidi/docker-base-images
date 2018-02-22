@@ -1,6 +1,6 @@
 FROM ushahidi/debian:stretch-dockerize
 
-ENV PHP_MAJOR_VERSION 7.0
+ENV PHP_MAJOR_VERSION 7.2
 
 # Install php, extensions and handy tools
 RUN apt-get update && \
@@ -11,8 +11,8 @@ RUN apt-get update && \
     { echo 'deb https://packages.sury.org/php/ stretch main' > /etc/apt/sources.list.d/deb.sury.org.list ; } && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-      php7.0 php7.0-fpm php7.0-curl php7.0-json php7.0-mbstring php7.0-mcrypt \
-             php7.0-bcmath php7.0-mysql php7.0-imap php7.0-gd php7.0-xml php7.0-zip \
+      php7.2 php7.2-fpm php7.2-curl php7.2-json php7.2-mbstring \
+             php7.2-bcmath php7.2-mysql php7.2-imap php7.2-gd php7.2-xml php7.2-zip \
       php-redis php-memcached \
       gettext-base \
       unzip \
