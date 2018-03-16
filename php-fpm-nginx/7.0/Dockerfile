@@ -1,6 +1,11 @@
 FROM ushahidi/debian:stretch-dockerize
 
-ENV PHP_MAJOR_VERSION 7.0
+# PHP_DOCKER_USH_BUILD_SEQ can be incremented to force a rebuild within the
+# same minor version
+ENV PHP_VERSION=7 \
+    PHP_MAJOR_VERSION=7.0 \
+    PHP_MINOR_VERSION=7.0.28 \
+    PHP_DOCKER_USH_BUILD_SEQ=1
 
 # Install php, extensions and handy tools
 RUN apt-get update && \
@@ -10,8 +15,10 @@ RUN apt-get update && \
     { curl https://packages.sury.org/php/apt.gpg | apt-key add - ; } && \
     { echo 'deb https://packages.sury.org/php/ stretch main' > /etc/apt/sources.list.d/deb.sury.org.list ; } && \
     apt-get update && \
+    PHP_PKG_VERSION=$(apt-cache show php${PHP_MAJOR_VERSION} | grep -E "^Version: ${PHP_MINOR_VERSION}" | sed -E -e 's/^Version:\s*//' | sort -r | head -1) && \
     apt-get install -y --no-install-recommends \
-      php7.0 php7.0-fpm php7.0-curl php7.0-json php7.0-mbstring php7.0-mcrypt \
+      php7.0=${PHP_PKG_VERSION} \
+             php7.0-fpm php7.0-curl php7.0-json php7.0-mbstring php7.0-mcrypt \
              php7.0-bcmath php7.0-mysql php7.0-imap php7.0-gd php7.0-xml php7.0-zip \
       php-redis php-memcached \
       gettext-base \
@@ -49,6 +56,7 @@ RUN $DOCKERCES_MANAGE_UTIL endpoint /usr/local/bin/init.sh
 
 ENV HTTP_PORT=8080 \
     ENABLE_NGINX=true \
-    ENABLE_PHPFPM=true
+    ENABLE_PHPFPM=true \
+    PHP_EXEC_TIME_LIMIT=900
 
 EXPOSE $HTTP_PORT

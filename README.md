@@ -15,11 +15,15 @@ that these ones are built on.
 
 `goss` is used for managing tests and running them
 
-        ./goss.sh edit <image directory name>
+        ./goss.sh edit <image directory name> <major version>
 
 will drop you into a shell running on the directory's image. From there you can use the `goss` command to
 manage your tests
 
 ## Run the tests
 
-        ./goss.sh run <image directory name>
+        ./goss.sh run <image directory name> <major version>
+
+i.e.
+
+        ./goss.sh run php-ci 7.0

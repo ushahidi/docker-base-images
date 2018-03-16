@@ -1,0 +1,94 @@
+command:
+  /bin/bash -c 'true':
+    exit-status: 0
+    stdout: []
+    stderr: []
+    timeout: 10000
+  composer --version:
+    exit-status: 0
+    stdout:
+    - /Composer version .*/
+    stderr:
+    - Do not run Composer as root/super user! See https://getcomposer.org/root for
+      details
+    timeout: 10000
+  nginx -v:
+    exit-status: 0
+    stdout: []
+    stderr:
+    - 'nginx version: nginx/1.10.3'
+    timeout: 10000
+  php --version:
+    exit-status: 0
+    stdout:
+    - /PHP 5.6.34-.* \(cli\)/
+    stderr: []
+    timeout: 10000
+  php -m:
+    exit-status: 0
+    stdout:
+    - '[PHP Modules]'
+    - bcmath
+    - calendar
+    - Core
+    - ctype
+    - curl
+    - date
+    - dom
+    - ereg
+    - exif
+    - fileinfo
+    - filter
+    - ftp
+    - gd
+    - gettext
+    - hash
+    - iconv
+    - igbinary
+    - imap
+    - json
+    - libxml
+    - mbstring
+    - mcrypt
+    - mhash
+    - mysql
+    - mysqli
+    - mysqlnd
+    - openssl
+    - pcntl
+    - pcre
+    - PDO
+    - pdo_mysql
+    - Phar
+    - posix
+    - readline
+    - redis
+    - Reflection
+    - session
+    - shmop
+    - SimpleXML
+    - sockets
+    - SPL
+    - standard
+    - sysvmsg
+    - sysvsem
+    - sysvshm
+    - tokenizer
+    - wddx
+    - xml
+    - xmlreader
+    - xmlwriter
+    - xsl
+    - Zend OPcache
+    - zip
+    - zlib
+    - '[Zend Modules]'
+    - Zend OPcache
+    stderr: []
+    timeout: 10000
+  php-fpm5.6 -v:
+    exit-status: 0
+    stdout:
+    - /PHP 5.6.34-.* \(fpm-fcgi\)/
+    stderr: []
+    timeout: 10000

@@ -5,7 +5,14 @@ if [ $$ -ne 1 ]; then
 	exit 1
 fi
 
+php_config() {
+	sed -E -i -e \
+	  "s/^;?[[:space:]]*max_execution_time[[:space:]]*=.*$/max_execution_time = ${PHP_EXEC_TIME_LIMIT}/" \
+		/etc/php/${PHP_MAJOR_VERSION}/fpm/php.ini
+}
+
 start() {
+	php_config
 	# Start the chaperone process
 	if [[ $UID -eq 0 || $EUID -eq 0 ]]; then
 		# root

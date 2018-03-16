@@ -1,30 +1,70 @@
-node-ci:
+node-ci-6:
   build:
-    image: ushahidi/node-ci
+    image: ushahidi/node-ci:6
     context: node-ci
-    dockerfile: Dockerfile
+    dockerfile: 6/Dockerfile
   volumes:
-    - ./node-ci/goss.yaml:/tmp/goss.yaml
+    - ./node-ci/6/goss.yaml:/tmp/goss.yaml
   volumes_from:
     - goss
 
-php-ci:
+php-ci-5.6:
   build:
-    image: ushahidi/php-ci
+    image: ushahidi/php-ci:5.6
     context: php-ci
-    dockerfile: Dockerfile
+    dockerfile: 5.6/Dockerfile
   volumes:
-    - ./php-ci/goss.yaml:/tmp/goss.yaml
+    - ./php-ci/5.6/goss.yaml:/tmp/goss.yaml
   volumes_from:
     - goss
 
-php-fpm-nginx:
+php-ci-7.0:
   build:
-    image: ushahidi/php-fpm-nginx
-    context: php-fpm-nginx
-    dockerfile: Dockerfile
+    image: ushahidi/php-ci:7.0
+    context: php-ci
+    dockerfile: 7.0/Dockerfile
   volumes:
-    - ./php-fpm-nginx/goss.yaml:/tmp/goss.yaml
+    - ./php-ci/7.0/goss.yaml:/tmp/goss.yaml
+  volumes_from:
+    - goss
+
+php-ci-7.2:
+  build:
+    image: ushahidi/php-ci:7.2
+    context: php-ci
+    dockerfile: 7.2/Dockerfile
+  volumes:
+    - ./php-ci/7.2/goss.yaml:/tmp/goss.yaml
+  volumes_from:
+    - goss
+
+php-fpm-nginx-5.6:
+  build:
+    image: ushahidi/php-fpm-nginx:5.6
+    context: php-fpm-nginx
+    dockerfile: 5.6/Dockerfile
+  volumes:
+    - ./php-fpm-nginx/5.6/goss.yaml:/tmp/goss.yaml
+  volumes_from:
+    - goss
+
+php-fpm-nginx-7.0:
+  build:
+    image: ushahidi/php-fpm-nginx:7.0
+    context: php-fpm-nginx
+    dockerfile: 7.0/Dockerfile
+  volumes:
+    - ./php-fpm-nginx/7.0/goss.yaml:/tmp/goss.yaml
+  volumes_from:
+    - goss
+
+php-fpm-nginx-7.2:
+  build:
+    image: ushahidi/php-fpm-nginx:7.2
+    context: php-fpm-nginx
+    dockerfile: 7.2/Dockerfile
+  volumes:
+    - ./php-fpm-nginx/7.2/goss.yaml:/tmp/goss.yaml
   volumes_from:
     - goss
 

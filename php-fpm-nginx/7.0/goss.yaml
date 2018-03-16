@@ -29,7 +29,7 @@ command:
   php --version:
     exit-status: 0
     stdout:
-    - /PHP 7\.0\.26/
+    - /PHP 7\.0\.28-.* \(cli\)/
     stderr: []
     timeout: 10000
   php -m:
@@ -95,6 +95,6 @@ command:
   php-fpm7.0 -v:
     exit-status: 0
     stdout:
-    - /PHP 7\.0\.26/
+    - /PHP 7\.0\.28-.* \(fpm-fcgi\)/
     stderr: []
     timeout: 10000

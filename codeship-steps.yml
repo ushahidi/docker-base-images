@@ -1,16 +1,32 @@
 - name: "Run tests"
   type: parallel
   steps:
-    - name: "Test node-ci"
-      service: node-ci
+    - name: "Test node-ci 6"
+      service: node-ci-6
       command: /goss/goss -g /tmp/goss.yaml v -f rspecish
 
-    - name: "Test php-ci"
-      service: php-ci
+    - name: "Test php-ci 5.6"
+      service: php-ci-5.6
       command: /goss/goss -g /tmp/goss.yaml v -f rspecish
 
-    - name: "Test php-fpm-nginx"
-      service: php-fpm-nginx
+    - name: "Test php-ci 7.0"
+      service: php-ci-7.0
+      command: /goss/goss -g /tmp/goss.yaml v -f rspecish
+
+    - name: "Test php-ci 7.2"
+      service: php-ci-7.0
+      command: /goss/goss -g /tmp/goss.yaml v -f rspecish
+
+    - name: "Test php-fpm-nginx 5.6"
+      service: php-fpm-nginx-5.6
+      command: /goss/goss -g /tmp/goss.yaml v -f rspecish
+
+    - name: "Test php-fpm-nginx 7.0"
+      service: php-fpm-nginx-7.0
+      command: /goss/goss -g /tmp/goss.yaml v -f rspecish
+
+    - name: "Test php-fpm-nginx 7.2"
+      service: php-fpm-nginx-7.2
       command: /goss/goss -g /tmp/goss.yaml v -f rspecish
 
 
@@ -20,7 +36,7 @@
   tag: master
   steps:
     - name: "Push ushahidi/php-ci:latest"
-      service: php-ci
+      service: php-ci-7.2
       type: push
       image_name: ushahidi/php-ci
       image_tag: latest
@@ -28,7 +44,7 @@
       encrypted_dockercfg_path: dockercfg.encrypted
 
     - name: "Push ushahidi/php-fpm-nginx:latest"
-      service: php-fpm-nginx
+      service: php-fpm-nginx-7.2
       type: push
       image_name: ushahidi/php-fpm-nginx
       image_tag: latest
@@ -36,28 +52,68 @@
       encrypted_dockercfg_path: dockercfg.encrypted
 
     - name: "Push ushahidi/node-ci:latest"
-      service: node-ci
+      service: node-ci-6
       type: push
       image_name: ushahidi/node-ci
       image_tag: latest
       registry: https://index.docker.io/v1/
       encrypted_dockercfg_path: dockercfg.encrypted
 
-## Publish PHP release tags
-- name: "Publish PHP release tags"
+# ## Publish PHP release tags
+- name: "Publish PHP 5.6 release tags"
   type: parallel
-  tag: '^php-.*'
+  tag: '^php-5\.6\.?.*'
   steps:
-    - name: "Push ushahidi/php-fpm-nginx:(php release tag)"
-      service: php-fpm-nginx
+    - name: "Push ushahidi/php-fpm-nginx:php-5.6(.*)"
+      service: php-fpm-nginx-5.6
       type: push
       image_name: ushahidi/php-fpm-nginx
       image_tag: "{{.Branch}}"
       registry: https://index.docker.io/v1/
       encrypted_dockercfg_path: dockercfg.encrypted
 
-    - name: "Push ushahidi/php-ci:(php release tag)"
-      service: php-ci
+    - name: "Push ushahidi/php-ci:php-5.6(.*)"
+      service: php-ci-5.6
+      type: push
+      image_name: ushahidi/php-ci
+      image_tag: "{{.Branch}}"
+      registry: https://index.docker.io/v1/
+      encrypted_dockercfg_path: dockercfg.encrypted
+
+- name: "Publish PHP 7.0 release tags"
+  type: parallel
+  tag: '^php-7\.0\.?.*'
+  steps:
+    - name: "Push ushahidi/php-fpm-nginx:php-7.0(.*)"
+      service: php-fpm-nginx-7.0
+      type: push
+      image_name: ushahidi/php-fpm-nginx
+      image_tag: "{{.Branch}}"
+      registry: https://index.docker.io/v1/
+      encrypted_dockercfg_path: dockercfg.encrypted
+
+    - name: "Push ushahidi/php-ci:php-7.0(.*)"
+      service: php-ci-7.0
+      type: push
+      image_name: ushahidi/php-ci
+      image_tag: "{{.Branch}}"
+      registry: https://index.docker.io/v1/
+      encrypted_dockercfg_path: dockercfg.encrypted
+
+- name: "Publish PHP 7.2 release tags"
+  type: parallel
+  tag: '^php-7\.2\.?.*'
+  steps:
+    - name: "Push ushahidi/php-fpm-nginx:php-7.2(.*)"
+      service: php-fpm-nginx-7.2
+      type: push
+      image_name: ushahidi/php-fpm-nginx
+      image_tag: "{{.Branch}}"
+      registry: https://index.docker.io/v1/
+      encrypted_dockercfg_path: dockercfg.encrypted
+
+    - name: "Push ushahidi/php-ci:php-7.2(.*)"
+      service: php-ci-7.2
       type: push
       image_name: ushahidi/php-ci
       image_tag: "{{.Branch}}"
@@ -67,10 +123,10 @@
 ## Publish node release tags
 - name: "Publish Node release tags"
   type: parallel
-  tag: '^node-.*'
+  tag: '^node-6\.?.*'
   steps:
-    - name: "Push ushahidi/node-ci:(node release tag)"
-      service: node-ci
+    - name: "Push ushahidi/node-ci:node-6(.*)"
+      service: node-ci-6
       type: push
       image_name: ushahidi/node-ci
       image_tag: "{{.Branch}}"
