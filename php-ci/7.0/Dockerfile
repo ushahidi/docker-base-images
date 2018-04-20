@@ -4,7 +4,7 @@ FROM php:7.0.29
 # same minor version
 ENV PHP_VERSION=7 \
     PHP_MAJOR_VERSION=7.0 \
-    PHP_MINOR_VERSION=7.0.28 \
+    PHP_MINOR_VERSION=7.0.29 \
     PHP_DOCKER_USH_BUILD_SEQ=1
 
 # Install extensions and handy tools
