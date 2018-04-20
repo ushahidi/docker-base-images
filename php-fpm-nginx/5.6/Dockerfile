@@ -6,7 +6,7 @@ ARG HTTP_PORT=8080
 # same minor version
 ENV PHP_VERSION=5 \
     PHP_MAJOR_VERSION=5.6 \
-    PHP_MINOR_VERSION=5.6.34 \
+    PHP_MINOR_VERSION=5.6.35 \
     PHP_DOCKER_USH_BUILD_SEQ=1
 
 # Install php, extensions and handy tools

@@ -21,7 +21,7 @@ command:
   php --version:
     exit-status: 0
     stdout:
-    - /PHP 5.6.34-.* \(cli\)/
+    - /PHP 5\.6\.[0-9]+-.* \(cli\)/
     stderr: []
     timeout: 10000
   php -m:
@@ -89,6 +89,6 @@ command:
   php-fpm5.6 -v:
     exit-status: 0
     stdout:
-    - /PHP 5.6.34-.* \(fpm-fcgi\)/
+    - /PHP 5\.6\.[0-9]+-.* \(fpm-fcgi\)/
     stderr: []
     timeout: 10000

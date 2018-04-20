@@ -15,9 +15,7 @@ command:
   php --version:
     exit-status: 0
     stdout:
-    - '/PHP 7\.2\.[0-9]* \(cli\) \(built: .*\) \( NTS \)/'
-    - '/Copyright \(c\) 199.-20.. The PHP Group/'
-    - '/Zend Engine v3\.2\.[0-9]*, Copyright \(c\) 199.-20.. Zend Technologies/'
+    - '/PHP 7\.2\.[0-9]+ \(cli\) \(built: .*\) \( NTS \)/'
     stderr: []
     timeout: 10000
   php -m:

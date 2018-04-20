@@ -1,10 +1,10 @@
-FROM php:5.6.34
+FROM php:5.6.35
 
 # PHP_DOCKER_USH_BUILD_SEQ can be incremented to force a rebuild within the
 # same minor version
 ENV PHP_VERSION=5 \
     PHP_MAJOR_VERSION=5.6 \
-    PHP_MINOR_VERSION=5.6.34 \
+    PHP_MINOR_VERSION=5.6.35 \
     PHP_DOCKER_USH_BUILD_SEQ=1
 
 # Install extensions and handy tools
@@ -22,8 +22,9 @@ RUN apt-get update && \
       unzip \
       rsync \
       git \
+      bison \
       netcat && \
-    docker-php-ext-install curl json mcrypt bcmath pdo pdo_mysql mysqli && \
+    docker-php-ext-install mcrypt bcmath pdo_mysql mysqli && \
     docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
     docker-php-ext-install imap && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
