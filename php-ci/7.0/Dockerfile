@@ -1,4 +1,4 @@
-FROM php:7.0.29
+FROM php:7.0.30
 
 # PHP_DOCKER_USH_BUILD_SEQ can be incremented to force a rebuild within the
 # same minor version
