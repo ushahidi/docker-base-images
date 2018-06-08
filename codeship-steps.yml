@@ -5,6 +5,10 @@
       service: node-ci-6
       command: /goss/goss -g /tmp/goss.yaml v -f rspecish
 
+    - name: "Test node-ci 8"
+      service: node-ci-8
+      command: /goss/goss -g /tmp/goss.yaml v -f rspecish
+
     - name: "Test php-ci 5.6"
       service: php-ci-5.6
       command: /goss/goss -g /tmp/goss.yaml v -f rspecish
@@ -121,12 +125,24 @@
       encrypted_dockercfg_path: dockercfg.encrypted
 
 ## Publish node release tags
-- name: "Publish Node release tags"
+- name: "Publish Node release tags v6"
   type: parallel
   tag: '^node-6\.?.*'
   steps:
     - name: "Push ushahidi/node-ci:node-6(.*)"
       service: node-ci-6
+      type: push
+      image_name: ushahidi/node-ci
+      image_tag: "{{.Branch}}"
+      registry: https://index.docker.io/v1/
+      encrypted_dockercfg_path: dockercfg.encrypted
+
+- name: "Publish Node release tags v8"
+  type: parallel
+  tag: '^node-8\.?.*'
+  steps:
+    - name: "Push ushahidi/node-ci:node-8(.*)"
+      service: node-ci-8
       type: push
       image_name: ushahidi/node-ci
       image_tag: "{{.Branch}}"

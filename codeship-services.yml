@@ -8,6 +8,16 @@ node-ci-6:
   volumes_from:
     - goss
 
+node-ci-8:
+  build:
+    image: ushahidi/node-ci:8
+    context: node-ci
+    dockerfile: 8/Dockerfile
+  volumes:
+    - ./node-ci/8/goss.yaml:/tmp/goss.yaml
+  volumes_from:
+    - goss
+
 php-ci-5.6:
   build:
     image: ushahidi/php-ci:5.6

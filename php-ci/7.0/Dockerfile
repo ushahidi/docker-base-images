@@ -4,7 +4,7 @@ FROM php:7.0.30
 # same minor version
 ENV PHP_VERSION=7 \
     PHP_MAJOR_VERSION=7.0 \
-    PHP_MINOR_VERSION=7.0.29 \
+    PHP_MINOR_VERSION=7.0.30 \
     PHP_DOCKER_USH_BUILD_SEQ=1
 
 # Install extensions and handy tools
@@ -13,7 +13,7 @@ RUN apt-get update && \
     apt-get install -y \
       libfreetype6-dev \
       libjpeg62-turbo-dev \
-      libpng12-dev \
+      libpng-dev \
       libmcrypt-dev \
       libc-client2007e-dev \
       libkrb5-dev \
