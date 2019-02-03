@@ -1,10 +1,10 @@
-FROM ruby:2.5.3
+FROM ruby:2.5.1
 
 # PHP_DOCKER_USH_BUILD_SEQ can be incremented to force a rebuild within the
 # same minor version
 ENV RUBY_VERSION=2 \
     RUBY_MAJOR_VERSION=2.5 \
-    RUBY_MINOR_VERSION=2.5.3 \
+    RUBY_MINOR_VERSION=2.5.1 \
     RUBY_DOCKER_USH_BUILD_SEQ=1
 
 # Install extensions and handy tools
