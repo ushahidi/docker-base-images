@@ -3,8 +3,8 @@ FROM ushahidi/debian:stretch-dockerize
 # PHP_DOCKER_USH_BUILD_SEQ can be incremented to force a rebuild within the
 # same minor version
 ENV PHP_VERSION=7 \
-    PHP_MAJOR_VERSION=7.0 \
-    PHP_MINOR_VERSION=7.0.33 \
+    PHP_MAJOR_VERSION=7.3 \
+    PHP_MINOR_VERSION=7.3.1 \
     PHP_DOCKER_USH_BUILD_SEQ=1
 
 # Install php, extensions and handy tools
@@ -17,9 +17,9 @@ RUN apt-get update && \
     apt-get update && \
     PHP_PKG_VERSION=$(apt-cache show php${PHP_MAJOR_VERSION} | grep -E "^Version: ${PHP_MINOR_VERSION}" | sed -E -e 's/^Version:\s*//' | sort -r | head -1) && \
     apt-get install -y --no-install-recommends \
-      php7.0=${PHP_PKG_VERSION} \
-             php7.0-fpm php7.0-curl php7.0-json php7.0-mbstring php7.0-mcrypt \
-             php7.0-bcmath php7.0-mysql php7.0-imap php7.0-gd php7.0-xml php7.0-zip \
+      php7.3=${PHP_PKG_VERSION} \
+             php7.3-fpm php7.3-curl php7.3-json php7.3-mbstring \
+             php7.3-bcmath php7.3-mysql php7.3-imap php7.3-gd php7.3-xml php7.3-zip \
       php-redis php-memcached \
       gettext-base \
       unzip \

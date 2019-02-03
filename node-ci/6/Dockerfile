@@ -1,8 +1,8 @@
-FROM node:6.14.2
+FROM node:6.16.0
 
 ENV NODE_VERSION=6 \
-    NODE_MAJOR_VERSION=6.14 \
-		NODE_MINOR_VERSION=6.14.2
+    NODE_MAJOR_VERSION=6.16 \
+		NODE_MINOR_VERSION=6.16.0
 
 # Install handy utils
 RUN apt-get update && \

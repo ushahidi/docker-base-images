@@ -1,10 +1,10 @@
-FROM php:7.0.33
+FROM php:7.3.1
 
 # PHP_DOCKER_USH_BUILD_SEQ can be incremented to force a rebuild within the
 # same minor version
 ENV PHP_VERSION=7 \
-    PHP_MAJOR_VERSION=7.0 \
-    PHP_MINOR_VERSION=7.0.33 \
+    PHP_MAJOR_VERSION=7.3 \
+    PHP_MINOR_VERSION=7.3.1 \
     PHP_DOCKER_USH_BUILD_SEQ=1
 
 # Install extensions and handy tools
@@ -14,7 +14,6 @@ RUN apt-get update && \
       libfreetype6-dev \
       libjpeg62-turbo-dev \
       libpng-dev \
-      libmcrypt-dev \
       libc-client2007e-dev \
       libkrb5-dev \
       libcurl4-openssl-dev \
@@ -24,7 +23,7 @@ RUN apt-get update && \
       git \
       bison \
       netcat && \
-    docker-php-ext-install mcrypt bcmath pdo_mysql mysqli && \
+    docker-php-ext-install bcmath pdo_mysql mysqli && \
     docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
     docker-php-ext-install imap && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \

@@ -1,0 +1,18 @@
+command:
+  /bin/bash -c 'true':
+    exit-status: 0
+    stdout: []
+    stderr: []
+    timeout: 10000
+  bundle --version:
+    exit-status: 0
+    stdout:
+    - Bundler version 2.0.1
+    stderr: []
+    timeout: 10000
+  ruby --version:
+    exit-status: 0
+    stdout:
+    - ruby 2.5.3p105 (2018-10-18 revision 65156) [x86_64-linux]
+    stderr: []
+    timeout: 10000

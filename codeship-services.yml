@@ -18,6 +18,16 @@ node-ci-8:
   volumes_from:
     - goss
 
+node-ci-10:
+  build:
+    image: ushahidi/node-ci:10
+    context: node-ci
+    dockerfile: 10/Dockerfile
+  volumes:
+    - ./node-ci/10/goss.yaml:/tmp/goss.yaml
+  volumes_from:
+    - goss
+
 php-ci-5.6:
   build:
     image: ushahidi/php-ci:5.6
@@ -38,6 +48,16 @@ php-ci-7.0:
   volumes_from:
     - goss
 
+php-ci-7.1:
+  build:
+    image: ushahidi/php-ci:7.1
+    context: php-ci
+    dockerfile: 7.1/Dockerfile
+  volumes:
+    - ./php-ci/7.1/goss.yaml:/tmp/goss.yaml
+  volumes_from:
+    - goss
+
 php-ci-7.2:
   build:
     image: ushahidi/php-ci:7.2
@@ -45,6 +65,26 @@ php-ci-7.2:
     dockerfile: 7.2/Dockerfile
   volumes:
     - ./php-ci/7.2/goss.yaml:/tmp/goss.yaml
+  volumes_from:
+    - goss
+
+php-ci-7.3:
+  build:
+    image: ushahidi/php-ci:7.3
+    context: php-ci
+    dockerfile: 7.3/Dockerfile
+  volumes:
+    - ./php-ci/7.3/goss.yaml:/tmp/goss.yaml
+  volumes_from:
+    - goss
+
+ruby-ci-2.5:
+  build:
+    image: ushahidi/ruby-ci:2.5
+    context: ruby-ci
+    dockerfile: 2.5/Dockerfile
+  volumes:
+    - ./ruby-ci/2.5/goss.yaml:/tmp/goss.yaml
   volumes_from:
     - goss
 
@@ -68,6 +108,16 @@ php-fpm-nginx-7.0:
   volumes_from:
     - goss
 
+php-fpm-nginx-7.1:
+  build:
+    image: ushahidi/php-fpm-nginx:7.1
+    context: php-fpm-nginx
+    dockerfile: 7.1/Dockerfile
+  volumes:
+    - ./php-fpm-nginx/7.1/goss.yaml:/tmp/goss.yaml
+  volumes_from:
+    - goss
+
 php-fpm-nginx-7.2:
   build:
     image: ushahidi/php-fpm-nginx:7.2
@@ -75,6 +125,16 @@ php-fpm-nginx-7.2:
     dockerfile: 7.2/Dockerfile
   volumes:
     - ./php-fpm-nginx/7.2/goss.yaml:/tmp/goss.yaml
+  volumes_from:
+    - goss
+
+php-fpm-nginx-7.3:
+  build:
+    image: ushahidi/php-fpm-nginx:7.3
+    context: php-fpm-nginx
+    dockerfile: 7.3/Dockerfile
+  volumes:
+    - ./php-fpm-nginx/7.3/goss.yaml:/tmp/goss.yaml
   volumes_from:
     - goss
 

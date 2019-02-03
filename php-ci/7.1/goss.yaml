@@ -1,0 +1,65 @@
+command:
+  /bin/bash -c 'true':
+    exit-status: 0
+    stdout: []
+    stderr: []
+    timeout: 10000
+  composer --version:
+    exit-status: 0
+    stdout:
+    - '/Composer version .*/'
+    stderr:
+    - Do not run Composer as root/super user! See https://getcomposer.org/root for
+      details
+    timeout: 10000
+  php --version:
+    exit-status: 0
+    stdout:
+    - '/PHP 7\.1\.[0-9]+ \(cli\) \(built: .*\) \( NTS \)/'
+    stderr: []
+    timeout: 10000
+  php -m:
+    exit-status: 0
+    stdout:
+    - '[PHP Modules]'
+    - bcmath
+    - Core
+    - ctype
+    - curl
+    - date
+    - dom
+    - fileinfo
+    - filter
+    - ftp
+    - gd
+    - hash
+    - iconv
+    - imap
+    - json
+    - libxml
+    - mbstring
+    - mcrypt
+    - mysqli
+    - mysqlnd
+    - openssl
+    - pcre
+    - PDO
+    - pdo_mysql
+    - pdo_sqlite
+    - Phar
+    - posix
+    - readline
+    - Reflection
+    - session
+    - SimpleXML
+    - SPL
+    - sqlite3
+    - standard
+    - tokenizer
+    - xml
+    - xmlreader
+    - xmlwriter
+    - zlib
+    - '[Zend Modules]'
+    stderr: []
+    timeout: 10000
