@@ -5,7 +5,7 @@ FROM ushahidi/debian:stretch-dockerize
 ENV PHP_VERSION=7 \
     PHP_MAJOR_VERSION=7.0 \
     PHP_MINOR_VERSION=7.0.33 \
-    PHP_DOCKER_USH_BUILD_SEQ=1
+    PHP_DOCKER_USH_BUILD_SEQ=2
 
 # Install php, extensions and handy tools
 RUN apt-get update && \

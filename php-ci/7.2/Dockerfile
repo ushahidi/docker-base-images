@@ -1,10 +1,10 @@
-FROM php:7.2.14
+FROM php:7.2.21
 
 # PHP_DOCKER_USH_BUILD_SEQ can be incremented to force a rebuild within the
 # same minor version
 ENV PHP_VERSION=7 \
     PHP_MAJOR_VERSION=7.2 \
-    PHP_MINOR_VERSION=7.2.14 \
+    PHP_MINOR_VERSION=7.2.21 \
     PHP_DOCKER_USH_BUILD_SEQ=1
 
 # Install extensions and handy tools
@@ -17,13 +17,14 @@ RUN apt-get update && \
       libc-client2007e-dev \
       libkrb5-dev \
       libcurl4-openssl-dev \
+      libzip-dev \
       gettext-base \
       unzip \
       rsync \
       git \
       bison \
       netcat && \
-    docker-php-ext-install bcmath pdo_mysql mysqli && \
+    docker-php-ext-install bcmath pdo_mysql mysqli zip && \
     docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
     docker-php-ext-install imap && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \

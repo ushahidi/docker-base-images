@@ -141,3 +141,8 @@ php-fpm-nginx-7.3:
 goss:
   build:
     dockerfile_path: goss.Dockerfile
+
+dockercfggen:
+  image: codeship/dockercfg-generator
+  add_docker: true
+  encrypted_env_file: docker.env.encrypted

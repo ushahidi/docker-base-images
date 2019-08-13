@@ -7,7 +7,7 @@ ARG HTTP_PORT=8080
 ENV PHP_VERSION=5 \
     PHP_MAJOR_VERSION=5.6 \
     PHP_MINOR_VERSION=5.6.40 \
-    PHP_DOCKER_USH_BUILD_SEQ=1
+    PHP_DOCKER_USH_BUILD_SEQ=2
 
 # Install php, extensions and handy tools
 RUN apt-get update && \
