@@ -19,7 +19,7 @@ command:
   gulp --version:
     exit-status: 0
     stdout:
-    - '/^\[[0-9:]+\] CLI version 3.9.1$/'
+    - '/^Local version: 4.0.2$/'
     stderr: []
     timeout: 10000
   node --version:
