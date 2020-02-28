@@ -1,10 +1,10 @@
-FROM php:7.2.21
+FROM php:7.2.28
 
 # PHP_DOCKER_USH_BUILD_SEQ can be incremented to force a rebuild within the
 # same minor version
 ENV PHP_VERSION=7 \
     PHP_MAJOR_VERSION=7.2 \
-    PHP_MINOR_VERSION=7.2.21 \
+    PHP_MINOR_VERSION=7.2.28 \
     PHP_DOCKER_USH_BUILD_SEQ=1
 
 # Install extensions and handy tools

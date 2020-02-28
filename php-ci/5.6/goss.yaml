@@ -8,9 +8,6 @@ command:
     exit-status: 0
     stdout:
     - '/Composer version .*/'
-    stderr:
-    - Do not run Composer as root/super user! See https://getcomposer.org/root for
-      details
     timeout: 10000
   php --version:
     exit-status: 0
