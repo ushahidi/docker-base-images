@@ -15,11 +15,6 @@ command:
   composer --version:
     exit-status: 0
     stdout:
-    - /Composer version 1\..*/
-    timeout: 10000
-  composer2 --version:
-    exit-status: 0
-    stdout:
     - /Composer version 2\..*/
     timeout: 10000
   nginx -v:
@@ -31,7 +26,7 @@ command:
   php --version:
     exit-status: 0
     stdout:
-    - /PHP 7\.3\.[0-9]+/
+    - /PHP 7\.4\.[0-9]+/
     stderr: []
     timeout: 10000
   php -m:
@@ -81,7 +76,6 @@ command:
     - sysvsem
     - sysvshm
     - tokenizer
-    - wddx
     - xml
     - xmlreader
     - xmlwriter
@@ -93,9 +87,9 @@ command:
     - Zend OPcache
     stderr: []
     timeout: 10000
-  php-fpm7.3 -v:
+  php-fpm7.4 -v:
     exit-status: 0
     stdout:
-    - /PHP 7\.3\.[0-9]+/
+    - /PHP 7\.4\.[0-9]+/
     stderr: []
     timeout: 10000

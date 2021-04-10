@@ -1,10 +1,10 @@
-FROM php:7.3.15
+FROM php:7.3.26
 
 # PHP_DOCKER_USH_BUILD_SEQ can be incremented to force a rebuild within the
 # same minor version
 ENV PHP_VERSION=7 \
     PHP_MAJOR_VERSION=7.3 \
-    PHP_MINOR_VERSION=7.3.15 \
+    PHP_MINOR_VERSION=7.3.27 \
     PHP_DOCKER_USH_BUILD_SEQ=1
 
 # Install extensions and handy tools
@@ -32,9 +32,11 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install composer
+# Install composer 1.x and 2.x
 RUN curl -sS https://getcomposer.org/installer | \
-      php -- --install-dir=/usr/local/bin --filename=composer
+      php -- --1 --install-dir=/usr/local/bin --filename=composer && \
+    curl -sS https://getcomposer.org/installer | \
+      php -- --2 --install-dir=/usr/local/bin --filename=composer2
 
 # Add ci wrapper
 ADD ci-wrapper.sh /usr/local/bin
