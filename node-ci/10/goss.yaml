@@ -7,7 +7,7 @@ command:
   bower --version:
     exit-status: 0
     stdout:
-    - 1.8.0
+    - 1.8.12
     stderr: []
     timeout: 10000
   git --version:
@@ -19,7 +19,7 @@ command:
   gulp --version:
     exit-status: 0
     stdout:
-    - '/^\[[0-9:]+\] CLI version 3.9.1$/'
+    - '/CLI version: .*/'
     stderr: []
     timeout: 10000
   node --version:
