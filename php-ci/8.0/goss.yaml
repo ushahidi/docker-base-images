@@ -7,17 +7,12 @@ command:
   composer --version:
     exit-status: 0
     stdout:
-    - '/Composer version 1.*/'
-    timeout: 10000
-  composer2 --version:
-    exit-status: 0
-    stdout:
     - '/Composer version 2.*/'
     timeout: 10000
   php --version:
     exit-status: 0
     stdout:
-    - '/PHP 7\.3\.[0-9]+ \(cli\) \(built: .*\) \( NTS \)/'
+    - '/PHP 8\.0\.[0-9]+ \(cli\) \(built: .*\) \( NTS \)/'
     stderr: []
     timeout: 10000
   php -m:

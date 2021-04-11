@@ -17,6 +17,18 @@ command:
     stdout:
     - /Composer version 2\..*/
     timeout: 10000
+  chaperone --debug --force --disable-services sleep 1:
+    exit-status: 0
+    stdout:
+    - /CONSOLE attempting start.*sleep/
+    - /CONSOLE successfully started/
+    timeout: 10000
+  chaperone --version:
+    exit-status: 0
+    stdout:
+    - /This is 'chaperone' version 0\.3\.*/
+    stderr: []
+    timeout: 10000
   nginx -v:
     exit-status: 0
     stdout: []

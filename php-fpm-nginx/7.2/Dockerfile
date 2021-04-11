@@ -30,6 +30,7 @@ RUN apt-get update && \
       python3 python3-pip python3-setuptools python3-wheel python3-dev && \
     php -r "if (new Redis() == true){ echo \"OK \r\n\"; }" && \
     pip3 install chaperone && \
+    test -d /usr/local/lib/python3.7/dist-packages/chaperone && \
     grep -lr 'asyncio.async' /usr/local/lib/python3.7/dist-packages/chaperone | \
       xargs sed -i -e 's/asyncio\.async/asyncio.ensure_future/' && \
     chgrp -R 0 /var/lib/nginx /run  && \
@@ -44,7 +45,7 @@ ADD php-fpm.conf ${DOCKERIZE_TEMPLATE_DIR}/etc/php/${PHP_MAJOR_VERSION}/fpm/php-
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | \
-      php -- --install-dir=/usr/local/bin --filename=composer
+      php -- --1 --install-dir=/usr/local/bin --filename=composer
 
 # Add nginx config template
 ADD nginx-vhost.conf ${DOCKERIZE_TEMPLATE_DIR}/etc/nginx/sites-available/default

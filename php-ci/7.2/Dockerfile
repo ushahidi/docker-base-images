@@ -34,7 +34,7 @@ RUN apt-get update && \
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | \
-      php -- --install-dir=/usr/local/bin --filename=composer
+      php -- --1 --install-dir=/usr/local/bin --filename=composer
 
 # Add ci wrapper
 ADD ci-wrapper.sh /usr/local/bin

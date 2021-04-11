@@ -7,7 +7,7 @@ command:
   composer --version:
     exit-status: 0
     stdout:
-    - '/Composer version .*/'
+    - '/Composer version 1.*/'
     timeout: 10000
   php --version:
     exit-status: 0

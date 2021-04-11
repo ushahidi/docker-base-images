@@ -2,9 +2,9 @@ FROM ushahidi/debian:buster-dockerize
 
 # PHP_DOCKER_USH_BUILD_SEQ can be incremented to force a rebuild within the
 # same minor version
-ENV PHP_VERSION=7 \
-    PHP_MAJOR_VERSION=7.4 \
-    PHP_MINOR_VERSION=7.4.16 \
+ENV PHP_VERSION=8 \
+    PHP_MAJOR_VERSION=8.0 \
+    PHP_MINOR_VERSION=8.0.3 \
     PHP_DOCKER_USH_BUILD_SEQ=1
 
 # Install php, extensions and handy tools
@@ -17,10 +17,10 @@ RUN apt-get update && \
     apt-get update && \
     PHP_PKG_VERSION=$(apt-cache show php${PHP_MAJOR_VERSION} | grep -E "^Version: ${PHP_MINOR_VERSION}" | sed -E -e 's/^Version:\s*//' | sort -r | head -1) && \
     apt-get install -y --no-install-recommends \
-      php7.4=${PHP_PKG_VERSION} \
-        php7.4-fpm php7.4-curl php7.4-json php7.4-mbstring \
-        php7.4-bcmath php7.4-mysql php7.4-imap php7.4-gd php7.4-xml php7.4-zip \
-        php7.4-redis php7.4-memcached \
+      php8.0=${PHP_PKG_VERSION} \
+        php8.0-fpm php8.0-curl php8.0-mbstring \
+        php8.0-bcmath php8.0-mysql php8.0-imap php8.0-gd php8.0-xml php8.0-zip \
+        php8.0-redis php8.0-memcached \
       gettext-base \
       unzip \
       rsync \

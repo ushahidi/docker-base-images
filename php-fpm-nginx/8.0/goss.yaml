@@ -15,7 +15,7 @@ command:
   composer --version:
     exit-status: 0
     stdout:
-    - /Composer version 1\..*/
+    - /Composer version 2\..*/
     timeout: 10000
   chaperone --debug --force --disable-services sleep 1:
     exit-status: 0
@@ -29,11 +29,6 @@ command:
     - /This is 'chaperone' version 0\.3\.*/
     stderr: []
     timeout: 10000
-  composer2 --version:
-    exit-status: 0
-    stdout:
-    - /Composer version 2\..*/
-    timeout: 10000
   nginx -v:
     exit-status: 0
     stdout: []
@@ -43,7 +38,7 @@ command:
   php --version:
     exit-status: 0
     stdout:
-    - /PHP 7\.3\.[0-9]+/
+    - /PHP 8\.0\.[0-9]+/
     stderr: []
     timeout: 10000
   php -m:
@@ -93,7 +88,6 @@ command:
     - sysvsem
     - sysvshm
     - tokenizer
-    - wddx
     - xml
     - xmlreader
     - xmlwriter
@@ -105,9 +99,9 @@ command:
     - Zend OPcache
     stderr: []
     timeout: 10000
-  php-fpm7.3 -v:
+  php-fpm8.0 -v:
     exit-status: 0
     stdout:
-    - /PHP 7\.3\.[0-9]+/
+    - /PHP 8\.0\.[0-9]+/
     stderr: []
     timeout: 10000
