@@ -1,8 +1,8 @@
-FROM node:10.24.1
+FROM node:14.16.1
 
-ENV NODE_VERSION=10 \
-    NODE_MAJOR_VERSION=10.24 \
-    NODE_MINOR_VERSION=10.24.1
+ENV NODE_VERSION=14 \
+    NODE_MAJOR_VERSION=14.16 \
+    NODE_MINOR_VERSION=14.16.1
 
 # Install handy utils
 RUN apt-get update && \

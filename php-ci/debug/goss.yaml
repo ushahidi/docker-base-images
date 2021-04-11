@@ -1,0 +1,16 @@
+file:
+  /xdebug.enable.sh:
+    exists: true
+    mode: "0755"
+    size: 1193
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+command:
+  php -v:
+    exit-status: 0
+    stdout:
+    - /with Xdebug v3\..*/
+    stderr: []
+    timeout: 10000
