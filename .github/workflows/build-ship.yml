@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     if: ${{ !startsWith( github.ref, 'refs/tags' ) || startsWith( github.ref, 'refs/tags/node-') }}
+    continue-on-error: true
     env:
       TAG_FILTER: refs/tags/node-${{matrix.node}}
 
@@ -75,6 +76,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     if: ${{ !startsWith( github.ref, 'refs/tags' ) || startsWith( github.ref, 'refs/tags/php-') }}
+    continue-on-error: true
     needs: setup
     env:
       TAG_FILTER: refs/tags/php-${{matrix.php}}

@@ -4,7 +4,7 @@ FROM ushahidi/debian:buster-dockerize
 # same minor version
 ENV PHP_VERSION=8 \
     PHP_MAJOR_VERSION=8.0 \
-    PHP_MINOR_VERSION=8.0.29 \
+    PHP_MINOR_VERSION=8.0.30 \
     PHP_DOCKER_USH_BUILD_SEQ=1
 
 # Install php, extensions and handy tools
