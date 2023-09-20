@@ -15,7 +15,7 @@ RUN apt-get update && \
     { curl https://packages.sury.org/php/apt.gpg | apt-key add - ; } && \
     { echo 'deb https://packages.sury.org/php/ buster main' > /etc/apt/sources.list.d/deb.sury.org.list ; } && \
     apt-get update && \
-    PHP_PKG_VERSION=$(apt-cache show php${PHP_MAJOR_VERSION} | grep -E "^Version: ${PHP_MINOR_VERSION}" | sed -E -e 's/^Version:\s*//' | sort -r | head -1) && \
+    PHP_PKG_VERSION=$(apt-cache show php${PHP_MAJOR_VERSION} | grep -E "^Version: ([[:digit:]]+:)?${PHP_MINOR_VERSION}" | sed -E -e 's/^Version:\s*//' | sort -r | head -1) && \
     apt-get install -y --no-install-recommends \
       php7.4=${PHP_PKG_VERSION} \
         php7.4-fpm php7.4-curl php7.4-json php7.4-mbstring \
