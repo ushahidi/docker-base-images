@@ -4,7 +4,7 @@ FROM ushahidi/debian:buster-dockerize
 # same minor version
 ENV PHP_VERSION=7 \
     PHP_MAJOR_VERSION=7.3 \
-    PHP_MINOR_VERSION=7.3.27 \
+    PHP_MINOR_VERSION=7.3.33 \
     PHP_DOCKER_USH_BUILD_SEQ=1
 
 # Install php, extensions and handy tools
@@ -42,6 +42,7 @@ RUN apt-get update && \
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log
 ADD php-fpm.conf ${DOCKERIZE_TEMPLATE_DIR}/etc/php/${PHP_MAJOR_VERSION}/fpm/php-fpm.conf
+ADD php-ush.ini ${DOCKERIZE_TEMPLATE_DIR}/etc/php/${PHP_MAJOR_VERSION}/fpm/conf.d/99-ush.ini
 
 # Install composer 1.x and 2.x
 RUN curl -sS https://getcomposer.org/installer | \

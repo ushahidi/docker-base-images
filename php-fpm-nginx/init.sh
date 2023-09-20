@@ -12,7 +12,8 @@ php_config() {
 }
 
 start() {
-	php_config
+	# DEPRECATED FOR php-ush con.d file
+	# php_config
 	# Start the chaperone process
 	if [[ $UID -eq 0 || $EUID -eq 0 ]]; then
 		# root
