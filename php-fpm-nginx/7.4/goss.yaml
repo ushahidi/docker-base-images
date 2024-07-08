@@ -1,5 +1,5 @@
 file:
-  /entrypoint.dockerize.sh:
+  /init.dockerize.sh:
     exists: true
     mode: "0755"
     owner: root
@@ -33,7 +33,7 @@ command:
     exit-status: 0
     stdout: []
     stderr:
-    - 'nginx version: nginx/1.14.2'
+    - 'nginx version: nginx/1.18.0'
     timeout: 10000
   php --version:
     exit-status: 0
