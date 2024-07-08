@@ -1,4 +1,4 @@
-FROM ushahidi/debian:buster-dockerize
+FROM ushahidi/debian:bullseye-dockerize
 
 # PHP_DOCKER_USH_BUILD_SEQ can be incremented to force a rebuild within the
 # same minor version
@@ -11,9 +11,9 @@ ENV PHP_VERSION=7 \
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
-      apt-transport-https curl gnupg ca-certificates && \
-    { curl https://packages.sury.org/php/apt.gpg | apt-key add - ; } && \
-    { echo 'deb https://packages.sury.org/php/ buster main' > /etc/apt/sources.list.d/deb.sury.org.list ; } && \
+      lsb-release apt-transport-https curl ca-certificates && \
+    { curl -sSLo /tmp/debsuryorg-archive-keyring.deb https://packages.sury.org/debsuryorg-archive-keyring.deb ; dpkg -i /tmp/debsuryorg-archive-keyring.deb ; rm /tmp/debsuryorg-archive-keyring.deb; } && \
+    { echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/deb.sury.org.list ; } && \
     apt-get update && \
     PHP_PKG_VERSION=$(apt-cache show php${PHP_MAJOR_VERSION} | grep -E "^Version: ([[:digit:]]+:)?${PHP_MINOR_VERSION}" | sed -E -e 's/^Version:\s*//' | sort -r | head -1) && \
     apt-get install -y --no-install-recommends \
@@ -31,8 +31,8 @@ RUN apt-get update && \
     php -r "if (new Redis() == true){ echo \"OK \r\n\"; }" && \
     pip3 install chaperone && \
     pip3 install 'PyYAML>=3.1.1,<5.4' && \
-    test -d /usr/local/lib/python3.7/dist-packages/chaperone && \
-    grep -lr 'asyncio.async' /usr/local/lib/python3.7/dist-packages/chaperone | \
+    test -d /usr/local/lib/python3.9/dist-packages/chaperone && \
+    grep -lr 'asyncio.async' /usr/local/lib/python3.9/dist-packages/chaperone | \
       xargs sed -i -e 's/asyncio\.async/asyncio.ensure_future/' && \
     chgrp -R 0 /var/lib/nginx /run  && \
     chmod -R g+rwX /var/lib/nginx /run && \
