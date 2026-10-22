@@ -8,7 +8,10 @@ ENV PHP_VERSION=7 \
     PHP_DOCKER_USH_BUILD_SEQ=2
 
 # Install php, extensions and handy tools
-RUN apt-get update && \
+# (bullseye is EOL, its packages have moved to archive.debian.org)
+RUN sed -i -E -e 's#https?://(deb|security)\.debian\.org/#http://archive.debian.org/#' \
+      /etc/apt/sources.list $(ls /etc/apt/sources.list.d/*.list 2>/dev/null) && \
+    apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
       lsb-release apt-transport-https curl ca-certificates && \
